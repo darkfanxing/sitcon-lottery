@@ -1,0 +1,73 @@
+html, body {
+  height: 100%;
+  font-family: "微軟正黑體"!important;
+}
+
+#draw-lottery {
+  height: 60%;
+}
+
+.animation {
+  -webkit-transition: all 0.01s ease-in;
+  -moz-transition: all 0.01s ease-in;
+  -ms-transition: all 0.01s ease-in;
+  -o-transition: all 0.01s ease-in;
+  transition: all 0.01s ease-in;
+}
+
+.zoom-in {
+  z-index: 2!important;
+  opacity: 0;
+}
+
+#zone-one {
+  height: 15%;
+  text-align: center;
+}
+
+#zone-two {
+  height: 15%;
+  text-align: center;
+}
+
+.number {
+  position: absolute;
+  top: calc(35% - 105px);
+  left: calc(50% - 57px);
+  font-size: 100px;
+  line-height: 300px;
+  color: white;
+  text-align: center;
+}
+
+#lotto-ball {
+  background-color: black;
+  position: absolute;
+  top: calc(30% - 150px);
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+.selected-ball {
+  height: 30px;
+  width: 30px;
+  border: 3px solid black;
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+.zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zone div {
+  margin: 0 15px;
+}
+
+h1 {
+  font-size: 30px;
+}
