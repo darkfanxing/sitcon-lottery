@@ -7,12 +7,14 @@ html, body {
   height: 60%;
 }
 
-.animation {
-  -webkit-transition: all 5s ease-in;
-  -moz-transition: all 5s ease-in;
-  -ms-transition: all 5s ease-in;
-  -o-transition: all 5s ease-in;
-  transition: all 5s ease-in;
+@keyframes rotate360 {
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+.rotate-animation {
+  animation: 1.5s rotate360 infinite cubic-bezier(0, 1, 1, 0);
 }
 
 .zoom-in {
@@ -32,32 +34,30 @@ html, body {
 
 .number {
   position: absolute;
-  top: calc(35% - 108px);
-  left: calc(50% - 57px);
+  top: calc(35% - 100px);
+  left: calc(50% - 55px);
   font-size: 100px;
   line-height: 300px;
   color: white;
   text-align: center;
 }
 
-#start-button {
+#lotto-ball-background {
+  background-image: url("compass.svg");
+  background-repeat: no-repeat;
   position: absolute;
-  top: calc(50% - 10px);
-  left: calc(50vw - 30px);
-  width: 60px;
-  height: 20px;
-  border-radius: 5px;
-  border: 0px;
+  top: calc(30% - 175px);
+  left: calc(50% - 175px);
+  width: 350px;
+  height: 350px;
 }
 
 #lotto-ball {
-  background-color: black;
   position: absolute;
-  top: calc(30% - 150px);
-  left: calc(50% - 150px);
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  top: calc(30% - 175px);
+  left: calc(50% - 175px);
+  width: 350px;
+  height: 350px;
 }
 
 .selected-ball {
