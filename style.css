@@ -1,6 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
+
 html, body {
   height: 100%;
-  font-family: "Consolas", "微軟正黑體"!important;
+  font-family: 'Roboto', sans-serif"微軟正黑體"!important;
 }
 
 #draw-lottery {
@@ -32,8 +34,8 @@ html, body {
 
 .number {
   position: absolute;
-  top: calc(35% - 108px);
-  left: calc(50% - 57px);
+  top: calc(35% - 100px);
+  left: calc(50% - 58px);
   font-size: 100px;
   line-height: 300px;
   color: white;
@@ -42,7 +44,7 @@ html, body {
 
 #start-button {
   position: absolute;
-  top: calc(50% - 10px);
+  top: calc(50% + 10px);
   left: calc(50vw - 30px);
   width: 60px;
   height: 20px;
