@@ -32,7 +32,7 @@ html, body {
 
 .number {
   position: absolute;
-  top: calc(35% - 105px);
+  top: calc(35% - 108px);
   left: calc(50% - 57px);
   font-size: 100px;
   line-height: 300px;
