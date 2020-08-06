@@ -71,7 +71,6 @@ document.getElementsByTagName("body")[0].onclick = () => {
           lottoBallNumber = 2;
           number = 0;
           addLottoBall();
-          transition.begin(document.getElementById("lotto-ball"), ["background-color", "#000", "#FE407A", "1000ms", "ease-out"]);
           resetOpacity();
           animation = setInterval(accelerateChangeNumber, animationTime);
           isAnimate = true;
