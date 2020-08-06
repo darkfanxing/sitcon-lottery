@@ -2,7 +2,7 @@ var number = 0;
 var isAnimate = false;
 var result = [10, 11, 12, 13, 14, Math.floor(Math.random() * 2)];
 var drawOrder = 0;
-var animationTime = 385;
+var animationTime = 405;
 var lottoBallNumber = 14;
 var animation;
 
@@ -50,8 +50,8 @@ function accelerateChangeNumber() {
   changeNumber();
   
   if (animationTime >= 100) {
-    // final: 65ms
-    animationTime -= 40;
+    // final: 45ms
+    animationTime -= 60;
     clearInterval(animation);
     animation = setInterval(accelerateChangeNumber, animationTime);
   }
@@ -62,7 +62,7 @@ resetOpacity();
 
 document.getElementById("start-button").onclick = () => {  
   if(!isAnimate) {
-    if (animationTime == 385) {
+    if (animationTime == 405) {
       if (drawOrder == 5) {
         if (document.getElementById("zone-two").innerHTML.indexOf("selected-ball") == -1) {
           lottoBallNumber = 2;
@@ -81,7 +81,7 @@ document.getElementById("start-button").onclick = () => {
       
     }
   } else {
-    if (animationTime <= 100) {
+    if (animationTime <= 405) {
       clearInterval(animation);
       let selectedNumber;
       
@@ -133,7 +133,7 @@ document.getElementById("start-button").onclick = () => {
               zoneTwo.innerHTML += `<div class="selected-ball">${number}</div>`
             }
 
-            animationTime = 385;
+            animationTime = 405;
 
           }, Math.floor(Math.random() * 1100 + 1000))
         }
