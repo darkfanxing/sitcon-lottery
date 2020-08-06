@@ -1,13 +1,13 @@
 var number = 0;
 var isAnimate = false;
-var animation;
-
-var result = [7, 2, 3, 4, 5, 6, Math.floor(Math.random() * 2)];
+var result = [10, 11, 12, 13, 14, Math.floor(Math.random() * 2)];
 var drawOrder = 0;
 var animationTime = 385;
+var lottoBallNumber = 14;
+var animation;
 
 function resetOpacity(specifiedNumber=0) {
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i <= lottoBallNumber; i++) {
     let lottoBall = document.getElementById(`number-${i}`);
     if (i != specifiedNumber) {
       lottoBall.style.opacity = 0;
@@ -18,14 +18,15 @@ function resetOpacity(specifiedNumber=0) {
 }
 
 function addLottoBall() {
-  for (let number = 14; number >= 0; number--) {
+  document.getElementById("lotto-ball").innerHTML = "";
+  for (let number = lottoBallNumber; number >= 0; number--) {
     if (number < 10) {
       var numberText = "0" + String(number);
     } else {
       var numberText = number;
     }
   
-    document.getElementById("lotto-ball").innerHTML += `<div id="number-${number}" class="number animation">${numberText}</div>`
+    document.getElementById("lotto-ball").innerHTML += `<div id="number-${number}" class="number">${numberText}</div>`
   }
 }
 
@@ -35,10 +36,10 @@ function changeNumber() {
   if (number != 0) {
     document.getElementById(`number-${number - 1}`).style.opacity = 0;
   } else {
-    document.getElementById("number-14").style.opacity = 0;
+    document.getElementById(`number-${lottoBallNumber}`).style.opacity = 0;
   }
   
-  if (number < 14) {
+  if (number < lottoBallNumber) {
     number += 1;
   } else {
     number = 0;
@@ -59,22 +60,41 @@ function accelerateChangeNumber() {
 addLottoBall();
 resetOpacity();
 
-document.getElementById("btn").onclick = () => {
-  
+document.getElementById("start-button").onclick = () => {  
   if(!isAnimate) {
     if (animationTime == 385) {
-      animation = setInterval(accelerateChangeNumber, animationTime);
-      isAnimate = true;
+      if (drawOrder == 5) {
+        if (document.getElementById("zone-two").innerHTML.indexOf("selected-ball") == -1) {
+          lottoBallNumber = 2;
+          number = 0;
+          addLottoBall();
+          transition.begin(document.getElementById("lotto-ball"), ["background-color", "#000", "#FE407A", "1000ms", "ease-out"]);
+          resetOpacity();
+          animation = setInterval(accelerateChangeNumber, animationTime);
+          isAnimate = true;
+        }
+      } else {
+        animation = setInterval(accelerateChangeNumber, animationTime);
+        isAnimate = true;
+      }
+
+      
     }
   } else {
     if (animationTime <= 100) {
       clearInterval(animation);
-
       let selectedNumber;
-      if (result[drawOrder] - 10 < 0) {
-        selectedNumber = 14 - Math.abs(result[drawOrder] - 10)
+      
+      let randomIndex = Math.floor(Math.random() * 6 + 5);
+      if (lottoBallNumber == 14) {
+        
+        if (result[drawOrder] - randomIndex < 0) {
+          selectedNumber = lottoBallNumber - Math.abs(result[drawOrder] - randomIndex)
+        } else {
+          selectedNumber = result[drawOrder] - randomIndex - 1
+        }
       } else {
-        selectedNumber = result[drawOrder] - 10
+        selectedNumber = Math.floor(Math.random() * 3);
       }
 
       animation = setInterval(changeToSpecifiedNumber, animationTime);
@@ -91,10 +111,14 @@ document.getElementById("btn").onclick = () => {
       function decelerateChangeNumber() {
         changeNumber();
 
-        if (animationTime <= 1000) {
+        if (animationTime <= 100 * randomIndex) {
           animationTime += 100;
           clearInterval(animation);
-          animation = setInterval(decelerateChangeNumber, animationTime);
+          if (animationTime >= 100 * (randomIndex - 1)) {
+            animation = setInterval(decelerateChangeNumber, Math.floor(Math.random() * 1035 + 1065));  
+          } else {
+            animation = setInterval(decelerateChangeNumber, animationTime);
+          }
         } else {
           clearInterval(animation);
 
@@ -106,12 +130,12 @@ document.getElementById("btn").onclick = () => {
               document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`
             } else {
               let zoneTwo = document.getElementById("zone-two");
-              if (zoneTwo.indexOf)
               zoneTwo.innerHTML += `<div class="selected-ball">${number}</div>`
             }
+
             animationTime = 385;
 
-          }, Math.floor(Math.random() * 1500) + 2000)
+          }, Math.floor(Math.random() * 1100 + 1000))
         }
       }
       isAnimate = false;

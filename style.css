@@ -8,11 +8,11 @@ html, body {
 }
 
 .animation {
-  -webkit-transition: all 0.01s ease-in;
-  -moz-transition: all 0.01s ease-in;
-  -ms-transition: all 0.01s ease-in;
-  -o-transition: all 0.01s ease-in;
-  transition: all 0.01s ease-in;
+  -webkit-transition: all 5s ease-in;
+  -moz-transition: all 5s ease-in;
+  -ms-transition: all 5s ease-in;
+  -o-transition: all 5s ease-in;
+  transition: all 5s ease-in;
 }
 
 .zoom-in {
@@ -40,6 +40,16 @@ html, body {
   text-align: center;
 }
 
+#start-button {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50vw - 30px);
+  width: 60px;
+  height: 20px;
+  border-radius: 5px;
+  border: 0px;
+}
+
 #lotto-ball {
   background-color: black;
   position: absolute;
@@ -51,11 +61,12 @@ html, body {
 }
 
 .selected-ball {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border: 3px solid black;
   border-radius: 50%;
   font-size: 30px;
+  line-height: 40px;
 }
 
 .zone {
