@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  font-family: "微軟正黑體"!important;
+  font-family: "Consolas", "微軟正黑體"!important;
 }
 
 #draw-lottery {
