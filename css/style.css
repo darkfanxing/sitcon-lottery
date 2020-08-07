@@ -48,10 +48,10 @@ html, body {
   background-image: url("../assets/compass.svg");
   background-repeat: no-repeat;
   position: absolute;
-  left: calc(50% - 175px);
-  top: calc(30% - 175px);
-  width: 350px;
-  height: 350px;
+  left: calc(50% - 200px);
+  top: calc(30% - 200px);
+  width: 400px;
+  height: 400px;
 }
 
 #lotto-ball {
