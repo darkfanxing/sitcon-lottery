@@ -80,7 +80,7 @@ html, body {
 
 #lotto-ball {
   position: absolute;
-  top: calc(30% - 175px);
+  top: calc(30% - 170px);
   left: calc(50% - 175px);
   width: 350px;
   height: 350px;
