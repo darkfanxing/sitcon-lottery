@@ -59,10 +59,7 @@ addLottoBall();
 resetOpacity();
 
 let test = false;
-let timeRecords = [];
 document.getElementsByTagName("html")[0].onclick = () => {
-  timeRecords.push(new Date().getTime());
-
   if (!test) {
     audio = new Audio('assets/bgm.mp3');
     audio.play();
@@ -204,8 +201,6 @@ document.getElementsByTagName("html")[0].onclick = () => {
                             document.getElementById("zone-one").style.opacity = "1";
                             document.getElementById("zone").style.transform = "translate(0px, -90%)";
                           }, 1000)
-
-                          console.log((timeRecords.pop() - timeRecords[0]) / 1000 + 2);
                         } else {
                           document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`;
                         }
