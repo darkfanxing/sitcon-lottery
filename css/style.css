@@ -9,14 +9,24 @@ html, body {
   height: 60%;
 }
 
-@keyframes rotate360 {
+@keyframes rotate720 {
   to {
     transform: rotate(720deg);
   }
 }
 
+@keyframes rotate360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.add-transition {
+  transition: all 0.5s;
+}
+
 .rotate-animation {
-  animation: 1.5s rotate360 infinite cubic-bezier(0, 1, 1, 0);
+  animation: 1.5s rotate720 infinite cubic-bezier(0, 1, 1, 0);
 }
 
 #zone-one {

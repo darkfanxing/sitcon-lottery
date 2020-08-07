@@ -60,9 +60,14 @@ function accelerateChangeNumber() {
 addLottoBall();
 resetOpacity();
 
-let timeRecords = [];
+let test = false;
 document.getElementsByTagName("html")[0].onclick = () => {
-  timeRecords.push(new Date().getTime());
+  if (!test) {
+    let audio = new Audio('assets/bgm1.mp3');
+    audio.play();
+    test = true;
+  }
+
   if(!isAnimate) {
     if (animationTime == 525) {
       if (drawOrder == 5) {
@@ -96,7 +101,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
       clearInterval(animation);
       let selectedNumber;
       
-      let randomIndex = Math.floor(Math.random() * 3 + 2);
+      let randomIndex = Math.floor(Math.random() * 3 + 3);
       if (lottoBallNumber == 14) {
         
         if (result[drawOrder] - randomIndex < 0) {
@@ -142,7 +147,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
               document.getElementById("lotto-ball-background-circle").style.backgroundColor = "gray";
             } else {
               let zoneTwo = document.getElementById("zone-two");
-              zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`
+              zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`                            
             }
 
             document.getElementById("lotto-ball-background-compass").classList.remove("rotate-animation");
