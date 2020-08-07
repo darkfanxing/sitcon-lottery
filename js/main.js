@@ -8,7 +8,7 @@ var animation;
 var audio;
 var reduceVolume;
 
-function resetOpacity(specifiedNumber=0) {
+function resetOpacity(specifiedNumber = 0) {
   for (let i = 0; i <= lottoBallNumber; i++) {
     let lottoBall = document.getElementById(`number-${i}`);
     if (i != specifiedNumber) {
@@ -27,7 +27,7 @@ function addLottoBall() {
     } else {
       var numberText = number;
     }
-  
+
     document.getElementById("lotto-ball").innerHTML += `<div id="number-${number}" class="number">${numberText}</div>`
   }
 }
@@ -40,7 +40,7 @@ function changeNumber() {
   } else {
     document.getElementById(`number-${lottoBallNumber}`).style.opacity = 0;
   }
-  
+
   if (number < lottoBallNumber) {
     number += 1;
   } else {
@@ -50,7 +50,7 @@ function changeNumber() {
 
 function accelerateChangeNumber() {
   changeNumber();
-  
+
   if (animationTime >= 100) {
     // final: 45ms
     animationTime -= 60;
@@ -72,7 +72,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
     test = true;
   }
 
-  if(!isAnimate) {
+  if (!isAnimate) {
     if (animationTime == 525) {
       if (drawOrder == 5) {
         if (document.getElementById("zone-two").innerHTML.indexOf("selected-ball") == -1) {
@@ -102,10 +102,10 @@ document.getElementsByTagName("html")[0].onclick = () => {
     if (animationTime == 45) {
       clearInterval(animation);
       let selectedNumber;
-      
+
       let randomIndex = Math.floor(Math.random() * 3 + 3);
       if (lottoBallNumber == 14) {
-        
+
         if (result[drawOrder] - randomIndex < 0) {
           selectedNumber = lottoBallNumber - Math.abs(result[drawOrder] - randomIndex)
         } else {
@@ -133,7 +133,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
           animationTime += 100;
           clearInterval(animation);
           if (animationTime >= 100 * (randomIndex - 1)) {
-            animation = setInterval(decelerateChangeNumber, Math.floor(Math.random() * 1035 + 1065));  
+            animation = setInterval(decelerateChangeNumber, Math.floor(Math.random() * 1035 + 1065));
           } else {
             animation = setInterval(decelerateChangeNumber, animationTime);
           }
@@ -142,7 +142,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
 
           setTimeout(() => {
             resetOpacity(number);
-            
+
             let testTime = 250;
 
             function drawNumberSelected(zoneNum) {
@@ -184,8 +184,8 @@ document.getElementsByTagName("html")[0].onclick = () => {
                   audio.volume = parseInt(0);
                   clearInterval(reduceVolume);
                 } else {
-                  
-                audio.volume -= 0.2;
+
+                  audio.volume -= 0.2;
                 }
               }, 500)
             }
@@ -194,7 +194,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
             setTimeout(() => {
               document.getElementById("lotto-ball").click();
             }, 1000)
-            
+
             animationTime = 525;
 
           }, Math.floor(Math.random() * 1100 + 1000))
