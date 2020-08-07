@@ -47,7 +47,6 @@ function changeNumber() {
 }
 
 function accelerateChangeNumber() {
-  console.log(animationTime)
   changeNumber();
   
   if (animationTime >= 100) {
@@ -61,7 +60,7 @@ function accelerateChangeNumber() {
 addLottoBall();
 resetOpacity();
 
-document.getElementsByTagName("body")[0].onclick = () => {  
+document.getElementsByTagName("html")[0].onclick = () => {  
   if(!isAnimate) {
     if (animationTime == 525) {
       document.getElementById("lotto-ball-background").classList.add("rotate-animation")

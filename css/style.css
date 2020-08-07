@@ -43,7 +43,7 @@ html, body {
 }
 
 #lotto-ball-background {
-  background-image: url("compass.svg");
+  background-image: url("../assets/compass.svg");
   background-repeat: no-repeat;
   position: absolute;
   top: calc(30% - 175px);
@@ -81,4 +81,12 @@ html, body {
 
 h1 {
   font-size: 30px;
+}
+
+.background-video {
+  position: fixed;
+  width: 100vw;
+  height: auto;
+  z-index: -1;
+  opacity: 0.5;
 }
