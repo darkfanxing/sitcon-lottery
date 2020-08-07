@@ -70,7 +70,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
   timeRecords.push(new Date().getTime());
 
   if (!test) {
-    audio = new Audio('assets/bgm2.mp3');
+    audio = new Audio('assets/bgm.mp3');
     audio.play();
     test = true;
   }
