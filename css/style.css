@@ -2,7 +2,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Roboto', sans-serif"微軟正黑體"!important;
+  font-family: 'Roboto', 'Consolas', sans-serif, "微軟正黑體"!important;
 }
 
 #draw-lottery {
