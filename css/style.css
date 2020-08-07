@@ -21,15 +21,15 @@ html, body {
   }
 }
 
-.add-transition {
-  transition: all 0.4s;
-}
-
 .end-transition {
   transition: all 2s;
 }
 
-.rotate-animation {
+body {
+  overflow: hidden;
+}
+
+.rotate-animation {cub
   animation: 1.5s rotate720 infinite cubic-bezier(0, 1, 1, 0);
 }
 
@@ -102,7 +102,7 @@ html, body {
 }
 
 .zone div {
-  margin: 0 25px;
+  margin-left: 25px;
 }
 
 h1 {
