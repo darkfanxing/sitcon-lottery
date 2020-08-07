@@ -65,9 +65,12 @@ resetOpacity();
 
 
 let test = false;
+let timeRecords = [];
 document.getElementsByTagName("html")[0].onclick = () => {
+  timeRecords.push(new Date().getTime());
+
   if (!test) {
-    audio = new Audio('assets/bgm2.mp3');
+    audio = new Audio('assets/bgm.mp3');
     audio.play();
     test = true;
   }
@@ -84,17 +87,21 @@ document.getElementsByTagName("html")[0].onclick = () => {
           addLottoBall();
           resetOpacity();
           animation = setInterval(accelerateChangeNumber, animationTime);
+          isAnimate = true;
           setTimeout(() => {
             document.getElementById("lotto-ball").click();
-          }, 3500 + Math.floor(Math.random() * 1500))
-          isAnimate = true;
+          }, 2800)
+
         }
       } else {
         document.getElementById("lotto-ball-background-compass").classList.add("rotate-animation")
         animation = setInterval(accelerateChangeNumber, animationTime);
         setTimeout(() => {
           document.getElementById("lotto-ball").click();
-        }, 3500 + Math.floor(Math.random() * 1500))
+          setTimeout(() => {
+            document.getElementById("lotto-ball").click();
+          }, 100)
+        }, 2800)
         isAnimate = true;
       }
     }
@@ -103,16 +110,16 @@ document.getElementsByTagName("html")[0].onclick = () => {
       clearInterval(animation);
       let selectedNumber;
 
-      let randomIndex = Math.floor(Math.random() * 3 + 3);
+      let randomIndex = Math.floor(Math.random() * 2 + 1);
       if (lottoBallNumber == 14) {
 
-        if (result[drawOrder] - randomIndex < 0) {
+        if (result[drawOrder] - randomIndex <= 0) {
           selectedNumber = lottoBallNumber - Math.abs(result[drawOrder] - randomIndex)
         } else {
           selectedNumber = result[drawOrder] - randomIndex - 1
         }
       } else {
-        selectedNumber = Math.floor(Math.random() * 3);
+        selectedNumber = Math.floor(Math.random() * 2 + 1);
       }
 
       animation = setInterval(changeToSpecifiedNumber, animationTime);
@@ -132,8 +139,8 @@ document.getElementsByTagName("html")[0].onclick = () => {
         if (animationTime <= 100 * randomIndex) {
           animationTime += 100;
           clearInterval(animation);
-          if (animationTime >= 100 * (randomIndex - 1)) {
-            animation = setInterval(decelerateChangeNumber, Math.floor(Math.random() * 1035 + 1065));
+          if (animationTime >= 100 * (randomIndex - 3)) {
+            animation = setInterval(decelerateChangeNumber, 500 * randomIndex);
           } else {
             animation = setInterval(decelerateChangeNumber, animationTime);
           }
@@ -147,6 +154,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
 
             function drawNumberSelected(zoneNum) {
               setTimeout(() => {
+                document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
                 document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
 
                 document.getElementById("lotto-ball-background-compass").style.transition = "all 0.25s";
@@ -161,6 +169,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
                   setTimeout(() => {
                     document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
                     document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
+                    document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
 
                     setTimeout(() => {
                       document.getElementById("lotto-ball").style.transitionTimingFunction = "linear";
@@ -212,6 +221,8 @@ document.getElementsByTagName("html")[0].onclick = () => {
                 }
               }, 500)
             }
+            animationTime = 525;
+            isAnimate = false;
 
             document.getElementById("lotto-ball-background-compass").classList.remove("rotate-animation");
 
@@ -220,7 +231,6 @@ document.getElementsByTagName("html")[0].onclick = () => {
           }, Math.floor(Math.random() * 1100 + 1000))
         }
       }
-      isAnimate = false;
     }
   }
 }
