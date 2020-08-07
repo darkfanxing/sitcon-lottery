@@ -29,7 +29,7 @@ body {
   overflow: hidden;
 }
 
-.rotate-animation {cub
+.rotate-animation {
   animation: 1.5s rotate720 infinite cubic-bezier(0, 1, 1, 0);
 }
 
