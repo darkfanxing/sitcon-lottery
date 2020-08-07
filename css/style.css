@@ -1,6 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
+
 html, body {
   height: 100%;
-  font-family: "Consolas", "微軟正黑體"!important;
+  font-family: 'Roboto', sans-serif"微軟正黑體"!important;
 }
 
 #draw-lottery {
@@ -46,8 +48,8 @@ html, body {
   background-image: url("../assets/compass.svg");
   background-repeat: no-repeat;
   position: absolute;
-  top: calc(30% - 175px);
   left: calc(50% - 175px);
+  top: calc(30% - 175px);
   width: 350px;
   height: 350px;
 }
