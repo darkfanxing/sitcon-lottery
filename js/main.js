@@ -169,7 +169,9 @@ document.getElementsByTagName("html")[0].onclick = () => {
                   setTimeout(() => {
                     document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
                     document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
-                    document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
+                    if (zoneNum !== 2) {
+                      document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
+                    }
 
                     setTimeout(() => {
                       document.getElementById("lotto-ball").style.transitionTimingFunction = "linear";
@@ -199,7 +201,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
                           document.getElementById("lotto-ball").click();
                         }, 1000)
                       }, testTime)
-                    }, 1000)
+                    }, 500)
                   }, testTime)
                 }, testTime)
               }, testTime)
