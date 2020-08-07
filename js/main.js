@@ -7,6 +7,7 @@ var lottoBallNumber = 14;
 var animation;
 var audio;
 var reduceVolume;
+var decelerationTime;
 
 function resetOpacity(specifiedNumber = 0) {
   for (let i = 0; i <= lottoBallNumber; i++) {
@@ -51,18 +52,12 @@ function changeNumber() {
 function accelerateChangeNumber() {
   changeNumber();
 
-  if (animationTime >= 100) {
-    // final: 45ms
-    animationTime -= 60;
-    clearInterval(animation);
-    animation = setInterval(accelerateChangeNumber, animationTime);
-  }
+  clearInterval(animation);
+  animation = setInterval(accelerateChangeNumber, animationTime);
 }
 
 addLottoBall();
 resetOpacity();
-
-
 
 let test = false;
 let timeRecords = [];
@@ -73,35 +68,61 @@ document.getElementsByTagName("html")[0].onclick = () => {
     audio = new Audio('assets/bgm.mp3');
     audio.play();
     test = true;
+
+    let zoneOne = document.getElementById("zone-one");
+    let zoneTwo = document.getElementById("zone-two");
+    zoneOne.classList.add("end-transition");
+    zoneTwo.classList.add("end-transition");
+    zoneTwo.style.transitionDuration = "1s";
+    document.getElementById("zone-one").style.transitionTimingFunction = "cubic-bezier(.21, .96, .24, .78)";
+    document.getElementById("zone-two").style.transitionTimingFunction = "cubic-bezier(.21, .96, .24, .78)";
+    zoneOne.style.transform = "translate(0px, 0px)"
+    zoneTwo.style.transform = "translate(0px, 0px)"
+    zoneTwo.style.opacity = 0.2;
+    setTimeout(() => {
+      zoneOne.classList.remove("end-transition");
+      zoneTwo.classList.remove("end-transition");
+    }, 2050)
   }
 
   if (!isAnimate) {
     if (animationTime == 525) {
       if (drawOrder == 5) {
         if (document.getElementById("zone-two").innerHTML.indexOf("selected-ball") == -1) {
-          document.getElementById("zone-one").style.opacity = 0.75;
-          document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
+          document.getElementById("zone-one").classList.add("end-transition");
+          document.getElementById("zone-two").classList.add("end-transition");
+          document.getElementById("zone-one").style.opacity = 0.2;
+          document.getElementById("zone-two").style.opacity = 1;
+          document.getElementById("zone-one").style.transitionDuration = "1s";
+          document.getElementById("zone-two").style.transitionDuration = "1s";
+          document.getElementById("zone-one").style.transitionTimingFunction = "cubic-bezier(1, .01, 0, 1)";
+          document.getElementById("zone-two").style.transitionTimingFunction = "cubic-bezier(1, .01, 0, 1)";
+
+          document.getElementById("zone-one").style.transform = "translate(0px, 100px)";
+          document.getElementById("zone-two").style.transform = "translate(0px, -100px)";
+
           document.getElementById("lotto-ball-background-compass").classList.add("rotate-animation");
           lottoBallNumber = 2;
           number = 0;
           addLottoBall();
           resetOpacity();
+          animationTime = 45;
           animation = setInterval(accelerateChangeNumber, animationTime);
           isAnimate = true;
           setTimeout(() => {
             document.getElementById("lotto-ball").click();
-          }, 2800)
-
+          }, Math.floor(Math.random() * 500 + 1000))
         }
       } else {
         document.getElementById("lotto-ball-background-compass").classList.add("rotate-animation")
+        animationTime = 45;
         animation = setInterval(accelerateChangeNumber, animationTime);
         setTimeout(() => {
           document.getElementById("lotto-ball").click();
           setTimeout(() => {
             document.getElementById("lotto-ball").click();
           }, 100)
-        }, 2800)
+        }, Math.floor(Math.random() * 500 + 1000))
         isAnimate = true;
       }
     }
@@ -110,13 +131,12 @@ document.getElementsByTagName("html")[0].onclick = () => {
       clearInterval(animation);
       let selectedNumber;
 
-      let randomIndex = Math.floor(Math.random() * 2 + 1);
+      let randomIndex = 3;
       if (lottoBallNumber == 14) {
-
         if (result[drawOrder] - randomIndex <= 0) {
           selectedNumber = lottoBallNumber - Math.abs(result[drawOrder] - randomIndex)
         } else {
-          selectedNumber = result[drawOrder] - randomIndex - 1
+          selectedNumber = result[drawOrder] - randomIndex
         }
       } else {
         selectedNumber = Math.floor(Math.random() * 2 + 1);
@@ -136,14 +156,10 @@ document.getElementsByTagName("html")[0].onclick = () => {
       function decelerateChangeNumber() {
         changeNumber();
 
-        if (animationTime <= 100 * randomIndex) {
-          animationTime += 100;
+        if (animationTime <= 200 * randomIndex) {
+          animationTime = (animationTime + 200) * 1.5;
           clearInterval(animation);
-          if (animationTime >= 100 * (randomIndex - 3)) {
-            animation = setInterval(decelerateChangeNumber, 500 * randomIndex);
-          } else {
-            animation = setInterval(decelerateChangeNumber, animationTime);
-          }
+          animation = setInterval(decelerateChangeNumber, animationTime);
         } else {
           clearInterval(animation);
 
@@ -153,34 +169,51 @@ document.getElementsByTagName("html")[0].onclick = () => {
             let testTime = 250;
 
             function drawNumberSelected(zoneNum) {
-              setTimeout(() => {
+              if (drawOrder < 5) {
+                drawOrder += 1;
                 document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
                 document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
-
-                document.getElementById("lotto-ball-background-compass").style.transition = "all 0.25s";
-                document.getElementById("lotto-ball").style.transition = "all 0.25s";
-                document.getElementById("lotto-ball-background-compass").style.transform = "scale(0)";
                 setTimeout(() => {
                   document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
                   document.getElementById("lotto-ball-background-circle").style.transform = "scale(1.2)";
-
-                  document.getElementById("lotto-ball").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
-                  document.getElementById("lotto-ball").style.transform = "scale(1.6)";
                   setTimeout(() => {
+                    document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`;
                     document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
                     document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
-                    if (zoneNum !== 2) {
-                      document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
-                    }
+                    document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
+                  }, testTime)
+                }, testTime)
+              } else {
+                document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
+                document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
+                setTimeout(() => {
+                  document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
+                  document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
 
+                  document.getElementById("lotto-ball-background-compass").style.transition = "all 0.25s";
+                  document.getElementById("lotto-ball").style.transition = "all 0.25s";
+                  document.getElementById("lotto-ball-background-compass").style.transform = "scale(0)";
+                  setTimeout(() => {
+                    document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
+                    document.getElementById("lotto-ball-background-circle").style.transform = "scale(1.2)";
+
+                    document.getElementById("lotto-ball").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
+                    document.getElementById("lotto-ball").style.transform = "scale(1.6)";
                     setTimeout(() => {
-                      document.getElementById("lotto-ball").style.transitionTimingFunction = "linear";
-                      document.getElementById("lotto-ball").style.transform = "scale(1)";
-                      document.getElementById("lotto-ball-background-compass").style.transform = "scale(1)";
+                      document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
+                      document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
+                      if (zoneNum !== 2) {
+                        document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
+                      }
+
                       setTimeout(() => {
-                        document.getElementById("lotto-ball").style.transition = "";
-                        document.getElementById("lotto-ball-background-compass").style.transition = "";
-                        document.getElementById("lotto-ball-background-compass").style.transform = "";
+                        document.getElementById("lotto-ball").style.transitionTimingFunction = "linear";
+                        document.getElementById("lotto-ball").style.transform = "scale(1)";
+                        document.getElementById("lotto-ball-background-compass").style.transform = "scale(1)";
+                        setTimeout(() => {
+                          document.getElementById("lotto-ball").style.transition = "";
+                          document.getElementById("lotto-ball-background-compass").style.transition = "";
+                          document.getElementById("lotto-ball-background-compass").style.transform = "";
 
                         if (zoneNum === 2) {
                           let zoneTwo = document.getElementById("zone-two");
