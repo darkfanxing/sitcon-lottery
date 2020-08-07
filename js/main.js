@@ -145,48 +145,47 @@ document.getElementsByTagName("html")[0].onclick = () => {
             
             let testTime = 250;
 
+            function drawNumberSelected(zoneNum) {
+              document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
+              setTimeout(() => {
+                document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
+                document.getElementById("lotto-ball-background-circle").style.transform = "scale(1.2)";
+                setTimeout(() => {
+                  document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
+                  document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
+                  setTimeout(() => {
+                    if (zoneNum === 2) {
+                      let zoneTwo = document.getElementById("zone-two");
+                      zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`;
+
+                      setTimeout(() => {
+                        document.getElementById("zone").classList.add("end-transition");
+
+                        document.getElementById("draw-lottery").classList.add("end-transition");
+                        document.getElementById("draw-lottery").style.opacity = 0;
+                        document.getElementById("zone").style.transform = "translate(0px, -90%)";
+                      }, 1000)
+                    } else {
+                      document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`;
+                    }
+                  })
+                }, testTime)
+              }, testTime)
+            }
+
             if (drawOrder < 5) {
               drawOrder += 1;
-              document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
-              setTimeout(() => {
-                document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
-                document.getElementById("lotto-ball-background-circle").style.transform = "scale(1.2)";
-                setTimeout(() => {
-                  document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
-                  document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
-                  setTimeout(() => {
-                    document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`;
-                  }, )
-                }, testTime)
-              }, testTime)
+              drawNumberSelected(1);
             } else {
-              document.getElementById("lotto-ball-background-circle").style.transform = "scale(0.95)";
-              setTimeout(() => {
-                document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "cubic-bezier(.84, 0, .44, .99)";
-                document.getElementById("lotto-ball-background-circle").style.transform = "scale(1.2)";
-                setTimeout(() => {
-                  document.getElementById("lotto-ball-background-circle").style.transitionTimingFunction = "linear";
-                  document.getElementById("lotto-ball-background-circle").style.transform = "scale(1)";
-                  setTimeout(() => {
-                    let zoneTwo = document.getElementById("zone-two");
-                    zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`;
-                    
-                    setTimeout(() => {
-                      document.getElementById("zone").classList.add("end-transition");
-                      
-                      document.getElementById("draw-lottery").classList.add("end-transition");
-                      document.getElementById("draw-lottery").style.opacity = 0;
-                      document.getElementById("zone").style.transform = "translate(0px, -90%)";
-                    }, 1000)
-                  }, testTime)
-                }, testTime)
-              }, testTime)
+              drawNumberSelected(2);
 
               reduceVolume = setInterval(() => {
-                audio.volume -= 0.2;
-                if(audio.volume == 0.2) {
+                if (audio.volume <= 0.2) {
                   audio.volume = parseInt(0);
                   clearInterval(reduceVolume);
+                } else {
+                  
+                audio.volume -= 0.2;
                 }
               }, 500)
             }
