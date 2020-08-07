@@ -63,7 +63,7 @@ resetOpacity();
 let test = false;
 document.getElementsByTagName("html")[0].onclick = () => {
   if (!test) {
-    let audio = new Audio('assets/bgm1.mp3');
+    let audio = new Audio('assets/bgm2.mp3');
     audio.play();
     test = true;
   }
