@@ -1,5 +1,5 @@
 const COLORS = {
-  GREEN:    '#77B55A',
+  GRAY:    'gray',
   WHITE:    'white',
 }
 
@@ -10,7 +10,7 @@ const bgBurst = new mojs.Burst({
   degree: 0,
   isShowEnd: false,
   children: {
-    fill:           [ COLORS.GREEN, COLORS.WHITE ],
+    fill:           [ COLORS.GRAY, COLORS.WHITE ],
     radius:         'stagger(200, 2)',
     scale:          { .1 : .15 },
     duration:       325,
@@ -27,7 +27,7 @@ const burst1 = new mojs.Burst({
   children: {
     fill:   'white',
     shape:  'line',
-    stroke: [ COLORS.WHITE, COLORS.GREEN ],
+    stroke: [ COLORS.WHITE, COLORS.GRAY ],
     strokeWidth: 12, 
     radius: 'rand(10, 20)',
     radiusY: 0,
@@ -45,7 +45,7 @@ const burst2 = new mojs.Burst({
   children: {
     shape:      [ 'circle', 'rect' ],
     points:     5,
-    fill:       [ "black", COLORS.GREEN ],
+    fill:       [ "black", COLORS.GRAY ],
     radius:     'rand(10, 20)',
     scale:      { 0.8: 0 },
     pathScale:  'rand(.5, 1)',
@@ -55,7 +55,7 @@ const burst2 = new mojs.Burst({
 
 const CIRCLE_OPTS = {
   left: 0, top: 0,
-  fill:     COLORS.GREEN,
+  fill:     COLORS.GRAY,
   scale:    { .1: .5 },
   opacity: { 1: 0 },
   isForce3d: true,
@@ -73,27 +73,33 @@ const circle2 = new mojs.Shape({
   easing: 'cubic.out',
   delay: 150,
 });
-  
-document.addEventListener( 'click', function (e) {
-  burst1
-    .tune({ x: e.pageX, y: e.pageY })
-    .generate()
-    .replay();
-  
-  burst2
-    .tune({ x: e.pageX, y: e.pageY })
-    .generate()
-    .replay();
-  
-  circle1
-    .tune({ x: e.pageX, y: e.pageY })
-    .replay();
-  
-  circle2
-    .tune({ x: e.pageX, y: e.pageY })
-    .replay();
-  
-  bgBurst
-    .tune({ x: e.pageX, y: e.pageY })
-    .replay();
+
+let isClick = false;
+document.addEventListener('click', function (e) {
+  if (!isClick) {
+    burst1
+      .tune({ x: e.pageX, y: e.pageY })
+      .generate()
+      .replay();
+    
+    burst2
+      .tune({ x: e.pageX, y: e.pageY })
+      .generate()
+      .replay();
+    
+    circle1
+      .tune({ x: e.pageX, y: e.pageY })
+      .replay();
+    
+    circle2
+      .tune({ x: e.pageX, y: e.pageY })
+      .replay();
+    
+    bgBurst
+      .tune({ x: e.pageX, y: e.pageY })
+      .replay();
+    
+    document.querySelectorAll('[data-shape="mojs-shape"]');
+    isClick = true;
+  }
 });

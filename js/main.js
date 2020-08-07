@@ -1,6 +1,6 @@
 var number = 0;
 var isAnimate = false;
-var result = [10, 11, 12, 13, 14, Math.floor(Math.random() * 2)];
+var result = [6, 11, 0, 9, 2, Math.floor(Math.random() * 3)];
 var drawOrder = 0;
 var animationTime = 525;
 var lottoBallNumber = 14;
@@ -60,33 +60,43 @@ function accelerateChangeNumber() {
 addLottoBall();
 resetOpacity();
 
-document.getElementsByTagName("html")[0].onclick = () => {  
+let timeRecords = [];
+document.getElementsByTagName("html")[0].onclick = () => {
+  timeRecords.push(new Date().getTime());
   if(!isAnimate) {
     if (animationTime == 525) {
-      document.getElementById("lotto-ball-background").classList.add("rotate-animation")
-
       if (drawOrder == 5) {
         if (document.getElementById("zone-two").innerHTML.indexOf("selected-ball") == -1) {
+          document.getElementById("lotto-ball-background-circle").style.opacity = 1;
+          document.getElementById("zone-one").style.opacity = 0.75;
+          document.getElementById("lotto-ball-background-circle").style.backgroundColor = "#77B55A";
+          document.getElementById("lotto-ball-background-compass").classList.add("rotate-animation")
           lottoBallNumber = 2;
           number = 0;
           addLottoBall();
           resetOpacity();
           animation = setInterval(accelerateChangeNumber, animationTime);
+          setTimeout(() => {
+            document.getElementById("lotto-ball").click();
+          }, 3500 + Math.floor(Math.random() * 1500))
           isAnimate = true;
         }
       } else {
+        document.getElementById("lotto-ball-background-circle").style.backgroundColor = "black";
+        document.getElementById("lotto-ball-background-compass").classList.add("rotate-animation")
         animation = setInterval(accelerateChangeNumber, animationTime);
+        setTimeout(() => {
+          document.getElementById("lotto-ball").click();
+        }, 3500 + Math.floor(Math.random() * 1500))
         isAnimate = true;
       }
-
-      
     }
   } else {
     if (animationTime == 45) {
       clearInterval(animation);
       let selectedNumber;
       
-      let randomIndex = Math.floor(Math.random() * 6 + 5);
+      let randomIndex = Math.floor(Math.random() * 3 + 2);
       if (lottoBallNumber == 14) {
         
         if (result[drawOrder] - randomIndex < 0) {
@@ -129,12 +139,17 @@ document.getElementsByTagName("html")[0].onclick = () => {
             if (drawOrder < 5) {
               drawOrder += 1;
               document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`
+              document.getElementById("lotto-ball-background-circle").style.backgroundColor = "gray";
             } else {
               let zoneTwo = document.getElementById("zone-two");
-              zoneTwo.innerHTML += `<div class="selected-ball">${number}</div>`
+              zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`
             }
 
-            document.getElementById("lotto-ball-background").classList.remove("rotate-animation")
+            document.getElementById("lotto-ball-background-compass").classList.remove("rotate-animation");
+            setTimeout(() => {
+              document.getElementById("lotto-ball").click();
+            }, 1000)
+            
             animationTime = 525;
 
           }, Math.floor(Math.random() * 1100 + 1000))
