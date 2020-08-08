@@ -211,7 +211,7 @@ document.getElementsByTagName("html")[0].onclick = () => {
                             document.getElementById("zone-one").style.transitionDuration = "1s";
                             document.getElementById("zone-one").style.opacity = "1";
                             document.getElementById("zone").style.transform = "translate(0px, -90%)";
-                          }, 1000)
+                          }, 1500)
                         } else {
                           if (number < 10) {
                             var numberText = "0" + String(number);
