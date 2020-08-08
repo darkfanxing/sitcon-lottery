@@ -1,6 +1,6 @@
 var number = 0;
 var isAnimate = false;
-var result = [10, 11, 12, 13, 14, Math.floor(Math.random() * 3)];
+var result = [13, 3, 10, 2, 6, Math.floor(Math.random() * 3)];
 var drawOrder = 0;
 var animationTime = 525;
 var lottoBallNumber = 14;
@@ -189,10 +189,21 @@ document.getElementsByTagName("html")[0].onclick = () => {
                         document.getElementById("lotto-ball-background-compass").style.transform = "";
 
                         if (zoneNum === 2) {
+                          let zoneOne = document.getElementById("zone-one");
                           let zoneTwo = document.getElementById("zone-two");
-                          zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${number}</div>`;
+                          if (number < 10) {
+                            var numberText = "0" + String(number);
+                          } else {
+                            var numberText = number;
+                          }
+                          zoneTwo.innerHTML += `<div class="selected-ball" style="color: #77B55A; border-color: #77B55A;">${numberText}</div>`;
 
                           setTimeout(() => {
+                            zoneOne.style.transitionDuration = "1.5s";
+                            zoneTwo.style.transitionDuration = "1.5s";
+
+                            zoneOne.style.transform = "translate(0px, 0px)";
+                            zoneTwo.style.transform = "translate(0px, 0px)";
                             document.getElementById("zone").classList.add("end-transition");
 
                             document.getElementById("draw-lottery").classList.add("end-transition");
@@ -202,7 +213,13 @@ document.getElementsByTagName("html")[0].onclick = () => {
                             document.getElementById("zone").style.transform = "translate(0px, -90%)";
                           }, 1000)
                         } else {
-                          document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${number}</div>`;
+                          if (number < 10) {
+                            var numberText = "0" + String(number);
+                          } else {
+                            var numberText = number;
+                          }
+
+                          document.getElementById("zone-one").innerHTML += `<div class="selected-ball">${numberText}</div>`;
                         }
 
                         setTimeout(() => {
