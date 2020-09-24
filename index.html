@@ -14,19 +14,22 @@
           <source src="assets/bg-h264.mp4" type="video/mp4" class="video">
         </video>
       </div>
-      <div id="draw-lottery" class="animation">
+
+      <div id="draw-lottery-container" class="animation">
         <div id="lotto-ball-background-compass"></div>
         <div id="lotto-ball-background-circle"></div>
         <div id="lotto-ball"></div>
       </div>
-      <div style="height: 30%;" id="zone">
-        <div id="zone-one" class="zone" style="height: 50%; transform: translate(-40px);">
-          <h1 style="color: white; background-color: black; padding: 10px; transform: skewX(-10.1deg); ">一區</h1>
+      
+      <div style="height: 30%;" id="zone-container">
+        <div id="zone-one" class="zone">
+          <h1 style="background-color: black;">一區</h1>
         </div>
-        <div id="zone-two" class="zone" style="height: 50%; transform: translate(40px, -15vh);">
-          <h1 id="zone-two-title" style="color: white; background-color: #4ea327; padding: 10px; transform: skewX(-10.1deg);">二區</h1>
+        <div id="zone-two" class="zone">
+          <h1 id="zone-two-title" style="background-color: #4ea327;">二區</h1>
         </div>
       </div>
+      
       <script>
         document.querySelector('video').playbackRate = 1.5;
       </script>

@@ -1,14 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,700,100italic,300italic,400italic,700italic);
 
-html, body {
-  height: 100%;
-  font-family: 'Roboto', 'Consolas', sans-serif, "微軟正黑體"!important;
-}
-
-#draw-lottery {
-  height: 60%;
-}
-
 @keyframes rotate720 {
   to {
     transform: rotate(720deg);
@@ -21,27 +12,25 @@ html, body {
   }
 }
 
-.end-transition {
-  transition: all 2s;
+html, body {
+  height: 100%;
+  font-family: 'Roboto', 'Consolas', sans-serif, "微軟正黑體"!important;
 }
 
 body {
   overflow: hidden;
 }
 
-.rotate-animation {
-  animation: 1.5s rotate720 infinite cubic-bezier(0, 1, 1, 0);
+.background-video {
+  position: fixed;
+  width: 100vw;
+  height: auto;
+  z-index: -99;
+  opacity: 0.5;
 }
 
-#zone-one {
-  height: 15%;
-  text-align: center;
-  transition: all 1s;
-}
-
-#zone-two {
-  height: 15%;
-  text-align: center;
+#draw-lottery-container {
+  height: 60%;
 }
 
 .number {
@@ -99,21 +88,36 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 50%;
+  text-align: center;
 }
 
 .zone div {
   margin-left: 25px;
 }
 
-h1 {
+.zone h1 {
+  color: white;
+  padding: 10px;
+  transform: skewX(-10.1deg);
   font-size: 30px;
   font-weight: 700;
 }
 
-.background-video {
-  position: fixed;
-  width: 100vw;
-  height: auto;
-  z-index: -99;
-  opacity: 0.5;
+#zone-one {
+  transition: all 1s;
+  transform: translate(-40px);
+}
+
+#zone-two {
+  transition: all 1s;
+  transform: translate(40px, -15vh);
+}
+
+.rotate-animation {
+  animation: 1.5s rotate720 infinite cubic-bezier(0, 1, 1, 0);
+}
+
+.end-transition {
+  transition: all 2s;
 }
